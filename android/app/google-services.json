@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1093739501592",
+    "project_id": "green-guard-6e40d",
+    "storage_bucket": "green-guard-6e40d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1093739501592:android:bc95f002cd220de5004b6d",
+        "android_client_info": {
+          "package_name": "com.example.green_guard"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPd6ySunS0-WLnzI-u5CKQOGl2CG4zLZY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
