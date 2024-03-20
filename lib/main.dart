@@ -7,13 +7,16 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart ' as http;
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:file_picker/file_picker.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +27,7 @@ class MyApp extends StatelessWidget {
 }
 
 class Home extends StatefulWidget {
-  const Home({super.key});
+  const Home({Key? key});
 
   @override
   State<Home> createState() => _HomeState();
@@ -67,6 +70,17 @@ class _HomeState extends State<Home> {
     }
   }
 
+  Future<void> _getImageFromFile() async {
+    FilePickerResult? result =
+        await FilePicker.platform.pickFiles(type: FileType.image);
+    if (result != null) {
+      File file = File(result.files.single.path!);
+      setState(() {
+        _image = XFile(file.path);
+      });
+    }
+  }
+
   Future<void> sendImage(XFile? imagefile) async {
     if (imagefile == null) return;
 
@@ -75,7 +89,10 @@ class _HomeState extends State<Home> {
     });
 
     String base64Image = base64Encode(File(imagefile.path).readAsBytesSync());
-    String apikey = "AIzaSyDpYPMArz430gNLYaGQZJsR1P7zC6biI0o";
+    String apikey =
+        "AIzaSyDpYPMArz430gNLYaGQZJsR1P7zC6biI0o"; // Replace with your actual API key
+
+    // Construct the request body
     String requestBody = json.encode({
       "contents": [
         {
@@ -119,26 +136,39 @@ class _HomeState extends State<Home> {
         }
       ]
     });
-    http.Response response = await http.post(
+
+    try {
+      // Make the HTTP POST request with the API key in the headers
+      http.Response response = await http.post(
         Uri.parse(
-            "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.0-pro-vision:generateContent?Key=$apikey"),
-        headers: {'Content-Type': "application/json"},
-        body: requestBody);
-    if (response.statusCode == 200) {
-      Map<String, dynamic> jsonBody = json.decode(response.body);
-      setState(() {
-        _responseBody =
-            jsonBody["candidates"][0]['content']['parts'][0]['text'];
-        _isSending = false;
-      });
-      print("Image sent successfully");
-    } else {
-      print("Request failed");
-      setState(() {
-        _isSending = false;
-      });
+            "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.0-pro-vision-latest:generateContent?key=$apikey"),
+        headers: {
+          'Content-Type': "application/json",
+          'Authorization':
+              'Bearer $apikey', // Replace $apikey with your actual key
+        },
+        body: requestBody,
+      );
+
+      if (response.statusCode == 200) {
+        Map<String, dynamic> jsonBody = json.decode(response.body);
+        setState(() {
+          _responseBody =
+              jsonBody["candidates"][0]['content']['parts'][0]['text'];
+          _isSending = false;
+        });
+        print("Image sent successfully");
+      } else {
+        print("Request failed");
+        setState(() {
+          _isSending = false;
+        });
+      }
+    } catch (e) {
+      print("Error sending image: $e");
+      // Handle exception
     }
-    print(response.body);
+    //print(response.body);
   }
 
   @override
@@ -175,6 +205,26 @@ class _HomeState extends State<Home> {
         },
         tooltip: _image == null ? "pick images" : "Send image",
         child: Icon(_image == null ? Icons.camera_alt : Icons.send),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+      bottomNavigationBar: BottomAppBar(
+        shape: const CircularNotchedRectangle(),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              IconButton(
+                icon: const Icon(Icons.photo_library),
+                onPressed: _getImageFromFile,
+              ),
+              IconButton(
+                icon: const Icon(Icons.camera_alt),
+                onPressed: _openCamera,
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
