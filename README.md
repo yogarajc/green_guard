@@ -1,16 +1,45 @@
-# green_guard
+# Green Guard - Agricultural Health Analysis Application
 
-"A new Flutter project."
+## Description: 
+Green Guard is an innovative mobile application designed to assist farmers and gardeners in analyzing the health of trees, plants, fruits, vegetables, and other farm products. The app provides clear explanations for identified diseases and offers step-by-step guidance on how to cure them in both English and Tamil with a single click.
 
-## Getting Started
+## Table of Contents
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Screenshots](#screenshots)
+- [Technologies Used](#technologies-used)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+## Features
+- Accurate disease identification using image recognition and machine learning.
+- Bilingual support for English and Tamil.
+- Detailed explanations of disease causes and symptoms.
+- Step-by-step cure instructions.
+- User-friendly interface designed for ease of use.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+  ## Usage
+- Open the app on your mobile device.
+- Capture or upload an image of the plant/product.
+- Wait for the analysis to complete.
+- View the detailed diagnosis and follow the recommended steps for curing.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Screenshots
+<img src="https://github.com/yogarajc/green_guard/blob/green-guard/assets/home_screen.jpg" alt="Home screen" width="300"/>
+# ![Diagnosis Result]
+<div style="display: flex; justify-content: space-around;">
+  <img src="https://github.com/yogarajc/green_guard/blob/green-guard/assets/1.jpg" alt="Diagnosis Result 1" width="300"/>
+  <img src="https://github.com/yogarajc/green_guard/blob/green-guard/assets/2.jpg" alt="Diagnosis Result 2" width="300"/>
+  <img src="https://github.com/yogarajc/green_guard/blob/green-guard/assets/3.jpg" alt="Diagnosis Result 3" width="300"/>
+  <img src="https://github.com/yogarajc/green_guard/blob/green-guard/assets/4.jpg" alt="Diagnosis Result 4" width="300"/>
+</div>
+
+
+## Contact
+For any questions or support, please contact:
+- **Yogaraj**: yogarajc27@gmail.com
+- [LinkedIn](https://www.linkedin.com/in/yogaraj-c-450581282/)
+- [GitHub](https://github.com/yogarajc)
